@@ -1,8 +1,8 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "kokekokko-obniz",
   "private": true,
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "My healthy-sleep monitoring service (obniz application part)",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
