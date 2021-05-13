@@ -9,7 +9,7 @@ import { Measure } from './measure.interface';
 @Injectable()
 export class AppService {
   private readonly logger = new Logger(AppService.name);
-  private latestMeasure: Measure = { weight: 0, datetime: 0 };
+  private latestMeasure: Measure = { weight: 0, datetime: 0, status: 'noData' };
   private obnizId: string;
 
   constructor(private configService: ConfigService) {
@@ -41,8 +41,13 @@ export class AppService {
       this.logger.log('grams: ' + value);
       this.latestMeasure.weight = value;
       this.latestMeasure.datetime = Date.now();
+      this.latestMeasure.status = 'ok';
       sensor.powerDown();
       await obniz.closeWait();
+    } else {
+      if (this.latestMeasure.status != 'noData') {
+        this.latestMeasure.status = 'ng';
+      }
     }
   }
 
