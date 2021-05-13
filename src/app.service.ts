@@ -51,8 +51,7 @@ export class AppService {
     }
   }
 
-  getWeight(): number {
-    // stub
-    return 42;
+  getMeasure(): Measure {
+    return this.latestMeasure;
   }
 }
