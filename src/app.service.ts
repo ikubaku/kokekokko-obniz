@@ -10,14 +10,10 @@ import { Measure } from './measure.interface';
 export class AppService {
   private readonly logger = new Logger(AppService.name);
   private latestMeasure: Measure = { weight: 0, datetime: 0, status: 'noData' };
-  private obnizId: string;
+  private readonly obnizId: string;
 
   constructor(private configService: ConfigService) {
     this.obnizId = configService.get('OBNIZ_ID');
-  }
-
-  getHello(): string {
-    return 'Hello World!';
   }
 
   @Cron('0 * * * * *')
