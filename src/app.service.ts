@@ -11,15 +11,18 @@ export class AppService {
   private readonly logger = new Logger(AppService.name);
   private latestMeasure: Measure = { weight: 0, datetime: 0, status: 'noData' };
   private readonly obnizId: string;
+  private readonly accessToken: string;
 
   constructor(private configService: ConfigService) {
     this.obnizId = configService.get('OBNIZ_ID');
+    this.accessToken = configService.get('ACCESS_TOKEN');
   }
 
   @Cron('0 * * * * *')
   async measure() {
     this.logger.log('Begin measuring...');
     const obniz = new Obniz(this.obnizId, {
+      access_token: this.accessToken,
       auto_connect: false,
       reset_obniz_on_ws_disconnection: false,
     });
